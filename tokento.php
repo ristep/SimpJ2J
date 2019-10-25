@@ -16,17 +16,21 @@ else{
 	if(isset($_GET['au-token'])){
 		$token = $_GET['au-token'];
 	}
-	else{
+	else
 		if(isset($_POST['au-token'])){
 			$token = $_POST['au-token'];
 		}
-		else{
-			require_once "echoErr.php";
-			echoErr(  (object)[ 'error' => 'tokenator', 'code' => 401, 'message' => 'Unauthorized, unknown user!!'  ] );
-			die();
-		}
-	}	
-}
+		else
+			if(isset($input->au_token)){
+				$token = $input->au_token;
+			}	
+			else{	
+				require_once "echoErr.php";
+				echoErr(  (object)[ 'error' => 'tokenator', 'code' => 401, 'message' => 'Unauthorized, unknown user!!'  ] );
+				die();
+			}
+}	
+
 try{
 	$decoded = JWT::decode($token	,$skey, ['HS256']);
 }
@@ -36,4 +40,5 @@ catch(Exception $err) {
 }	
 // print_r($decoded);
 return $decoded;
+
 ?>

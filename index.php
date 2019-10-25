@@ -1,7 +1,8 @@
 <?php
 header("Content-Type: application/json");
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+//header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Authorization, X-Requested-With');
 
 // this prevent errors from browsers prefeatch request
@@ -11,13 +12,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') die();
 require_once "functions.php";
 $cn = require "conn.php";
 
-//$userData = require_once('tokento.php'); // for user validation uncoment
-
 $method = $_SERVER['REQUEST_METHOD'];
 
 $input  = file_get_contents("php://input");
 //file_put_contents('inputDump.txt', $input, FILE_APPEND); // uncoment for debugging
 $input = json_decode($input);
+
+$userData = require_once('tokento.php'); // for user validation uncoment
 
 switch ($method) {
 	case 'POST': // update, insert, delete and select 
