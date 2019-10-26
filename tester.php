@@ -2,10 +2,13 @@
 	header('Content-Type: application/json');
 
 	require_once "functions.php";
+	require_once "phpFunctions.php";
+	
 	$cn = require "conn.php";
 	//print_r($cn);
 
-	$jsnq = [ (object) [ 
+	$jsnq = [ 
+	(object) [ 
 			table => 'lekovi', 
 			cmd => 'select', 
 			filter => ['atc_kod,sw,G04CB','and',['id,gt,40','or','id,eq,560']], 
@@ -29,13 +32,16 @@
 			table => 'lekovi', 
 			cmd => 'select', 
 			limit => [5, 12]
+		],
+		(object)[
+			phpFunction => "phpTestPrintout"
 		]
 ];
 	
 $prarr = array();
 
 foreach($jsnq as $key => $value ){	
-	array_push($prarr, (object)[ "JSON-".$key => $value], (object) [ "SQL-".$key => build_sql($value) ]);
+	array_push($prarr, (object)[ "JSON-".$key => $value], (object) [ "Output-".$key => build_sql($value) ]);
 }
 
 echo json_encode( $prarr );

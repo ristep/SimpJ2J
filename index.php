@@ -22,31 +22,53 @@ $userData = require_once('tokento.php'); // for user validation uncoment
 
 switch ($method) {
 	case 'POST': // update, insert, delete and select 
-		try{
-			$sql = build_sql($input);  // imported function from functions.php
-			$sth = $cn->prepare($sql);
-			$sth->execute((array)$input->data);
-			if($input->cmd == 'select' ){
-				$result = $sth->fetchAll(PDO::FETCH_ASSOC);
-			}else 
-				$result = (object)[];	
-			$ret = [
-				'OK' => true,
-				'error' => false,
-				'message' => "$input->cmd successfully!",
-				'SQL' => $sql,
-				'count' => $sth->rowCount(),
-				"data" => $result
+		if(isset($input->phpFunction)){
+			require_once "phpFunctions.php";
+			if(function_exists($input->phpFunction)) {
+				$result = ($input->phpFunction)($input);
+				$ret = [ 
+					'OK' => 'true',
+					'error' => false,
+					'message' => "RPC called successfully!",
+					'rpcName' => $input->phpFunction,
+					'data' => $result
 				];
-		} catch (PDOException $e) {
-			$ret = (object)[
-				'error' => 'DataBase',
-				'code' => 416,
-				'message' => "$input->cmd error!?!?",
-				'PDO' => $e,
-				'SQL' => $sql
-			];
-		}
+			}else{
+				$ret = (object)[
+					'OK' => false,
+					'error' => true,
+					'rpcName' => $input->phpFunction,
+					'message' => "RPC call error! function $input->phpFunction  doesn't  exist! ",
+					'data' => (object)[]
+				];
+			}
+		}else
+			if(isset($input->sqlStatement))
+				try{
+					$sql = build_sql($input);  // imported function from functions.php
+					$sth = $cn->prepare($sql);
+					$sth->execute((array)$input->data);
+					if($input->sqlStatement == 'select' ){
+						$result = $sth->fetchAll(PDO::FETCH_ASSOC);
+					}else 
+						$result = (object)[];	
+					$ret = [
+						'OK' => true,
+						'error' => false,
+						'message' => "$input->cmd successfully!",
+						'SQL' => $sql,
+						'count' => $sth->rowCount(),
+						"data" => $result
+						];
+				} catch (PDOException $e) {
+					$ret = (object)[
+						'error' => 'DataBase',
+						'code' => 416,
+						'message' => "$input->cmd error!?!?",
+						'PDO' => $e,
+						'SQL' => $sql
+					];
+				}
   break;
   case 'PUT':
 	case 'GET':
@@ -63,3 +85,5 @@ switch ($method) {
     ]);
 }
 echo json_encode($ret, JSON_NUMERIC_CHECK + JSON_PRESERVE_ZERO_FRACTION);
+
+?>

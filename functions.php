@@ -93,7 +93,7 @@ function build_filter($flt){
 
 function build_sql($input){
 	$where = "";
-	switch ($input->cmd) {
+	switch ($input->sqlStatement) {
 	case 'sql':
 		$badwords = ['delete', 'drop', 'insert', 'use', 'grant', 'user', 'update'];
 		$sql = $input->sql;
