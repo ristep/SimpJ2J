@@ -8,4 +8,5 @@ function phpTestPrintout($inp){
 	return (object) array_merge( (array) $info, (array) $inp );
 }
 
+// place for rpc declarations 
 ?>
