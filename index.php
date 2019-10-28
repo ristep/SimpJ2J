@@ -3,13 +3,15 @@
 header("Content-Type: application/json");
 header('Access-Control-Allow-Origin: *');
 //header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+// Only post request is valid
 header('Access-Control-Allow-Methods: POST');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Authorization, X-Requested-With');
 
-// this prevent errors from browsers prefeatch request
+//
+// this prevent errors from some browsers preflight OPTIONS request
+// some iluminations https://smanzary.sman.cloud/cors-nightmare-in-spa-applications/
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') die();
  
-//require_once "echoErr.php";
 require_once "functions.php";
 $cn = require "conn.php";
 
