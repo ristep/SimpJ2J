@@ -9,7 +9,7 @@ header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, Author
 
 //
 // this prevent errors from some browsers preflight OPTIONS request
-// some iluminations https://smanzary.sman.cloud/cors-nightmare-in-spa-applications/
+// some illuminations here https://smanzary.sman.cloud/cors-nightmare-in-spa-applications/
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') die();
  
 require_once "functions.php";
@@ -18,10 +18,10 @@ $cn = require "conn.php";
 $method = $_SERVER['REQUEST_METHOD'];
 
 $input  = file_get_contents("php://input");
-//file_put_contents('inputDump.txt', $input, FILE_APPEND); // uncoment for debugging
+//file_put_contents('inputDump.txt', $input, FILE_APPEND); // uncomment for debugging
 $input = json_decode($input);
 
-$userData = require_once('tokento.php'); // for user validation uncoment
+$userData = require_once('tokento.php'); // for user validation uncomment
 
 switch ($method) {
 	case 'POST': // update, insert, delete and select 
@@ -80,7 +80,7 @@ switch ($method) {
   default:
   		http_response_code(417);
 			$ret = ((object)[
-	    	'error' => "$method method forbiden",
+	    	'error' => "$method method forbidden",
       	'code' => 417,
       	'message' => "$method - Not implemented use POST",
 				'Info' => "This is test endpoint for RP_JSON-PHP-API. If you don't know what is this? You are here probably by mistake",
