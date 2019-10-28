@@ -1,4 +1,4 @@
-# SimpJ2J ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/ristep/SimpJ2J?label=ver&sort=semver) [![GitHub](https://img.shields.io/github/license/ristep/SimpJ2J)](https://github.com/ristep/SimpJ2J/blob/master/LICENSE)
+# SimpJ2J [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/ristep/SimpJ2J?label=ver&sort=semver)](https://github.com/ristep/SimpJ2J/tags) [![GitHub](https://img.shields.io/github/license/ristep/SimpJ2J)](https://github.com/ristep/SimpJ2J/blob/master/LICENSE)
 
 ## Simple JSON to SQL to JSON single point API writhen with PHP and PDO
 
@@ -38,7 +38,7 @@ Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of cond
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags).
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/ristep/SimpJ2J/tags).
 
 ## Author
 
