@@ -1,4 +1,4 @@
-# SimpJ2J ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/ristep/SimpJ2J?label=ver&sort=semver) ![GitHub](https://img.shields.io/github/license/ristep/SimpJ2J)
+# SimpJ2J ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/ristep/SimpJ2J?label=ver&sort=semver) [![GitHub](https://img.shields.io/github/license/ristep/SimpJ2J)](https://github.com/ristep/SimpJ2J/blob/master/LICENSE)
 
 ## Simple JSON to SQL to JSON single point API writhen with PHP and PDO
 
