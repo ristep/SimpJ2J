@@ -21,7 +21,7 @@ $input  = file_get_contents("php://input");
 //file_put_contents('inputDump.txt', $input, FILE_APPEND); // uncomment for debugging
 $input = json_decode($input);
 
-$userData = require_once('tokento.php'); // for user validation uncomment
+$userData = require_once('tokening.php'); // for user validation uncomment
 
 switch ($method) {
 	case 'POST': // update, insert, delete and select 
