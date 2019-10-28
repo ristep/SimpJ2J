@@ -4,7 +4,7 @@
 
 I started this project some time ago just for testing purposes. It was meant to be used in my ReactJS experiments. But I think is quite useful for small projects and not so small project.
 
-Do it simple bro is the main motto in this project, all other API for remote db access are to complex for my taste.\
+Do it simple bro is the main motto in this project, all other API for remote db access are to complex for my taste.
 
 Anyway now is completely open an anyone can use it as he whish.
 
@@ -22,7 +22,7 @@ composer will download "firebase/php-jwt" in /vendor folder.
 
 ## Prerequisites
 
-MySQL, PHP with PDO enabled ona apache2 webserver. Probably this will work on eny other http sever with PHP but is not tested, yet.
+MySQL, PHP with PDO enabled on an apache2 webserver. Probably will work on eny http sever with PHP but is not tested, yet.
 
 Full source code for testing app can be found here ong github [ristep/SimpJ2J-react-test](https://github.com/ristep/SimpJ2J-react-test)
 
