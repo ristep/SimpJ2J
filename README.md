@@ -14,9 +14,9 @@ Just download or clone this repo on jour LAMP server and compose :)
 
 Write on command prompt
 
-```
-composer
-```
+>
+>composer
+>
 
 composer will download "firebase/php-jwt" in /vendor folder.
 
@@ -25,6 +25,49 @@ composer will download "firebase/php-jwt" in /vendor folder.
 MySQL, PHP with PDO enabled on an apache2 webserver. Probably will work on eny http sever with PHP but is not tested, yet.
 
 Full source code for testing app can be found here ong github [ristep/SimpJ2J-react-test](https://github.com/ristep/SimpJ2J-react-test)
+
+## Using
+
+Just send post request whit JSON encoded Data
+
+```js
+// Example request JSON
+{
+  sqlStatement: 'select',
+  table: 'foods',
+  fields: [
+    'id',
+    'name'
+  ],
+  keyData: {
+    id: 980
+  }
+}
+```
+
+this will be transformed in to SQL statement:
+
+```SQL
+SELECT id,name FROM foods WHERE id='980' ;
+```
+
+and if everything is OK service will return something like this
+
+```json
+{
+  "OK": true,
+  "error": false,
+  "message": " successfully!",
+  "SQL": "SELECT id,name FROM foods WHERE id='980'  ;",
+  "count": 1,
+  "data": [
+    {
+      "id": 980,
+      "name": "Updated food name"
+    }
+  ]
+}
+```
 
 ## Built With
 
