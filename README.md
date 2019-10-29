@@ -1,6 +1,6 @@
 # SimpJ2J [![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/ristep/SimpJ2J?label=ver&sort=semver)](https://github.com/ristep/SimpJ2J/tags) [![GitHub](https://img.shields.io/github/license/ristep/SimpJ2J)](https://github.com/ristep/SimpJ2J/blob/master/LICENSE)
 
-## Simple JSON to SQL to JSON single point API writhen with PHP and PDO
+## Simple JSON to SQL to JSON single point DB access API writhen with PHP and PDO
 
 I started this project some time ago just for testing purposes. It was meant to be used in my ReactJS experiments. But I think is quite useful for small projects and not so small project.
 
@@ -74,7 +74,6 @@ and if everything is OK service will return something like this
 For live example go to this link:
 
 >
-<!-- > [llc-test.sman.cloud](https://llc-test.sman.cloud/){:target="_blank"} -->
 > <a href="https://llc-test.sman.cloud/" target="_blank">llc-test.sman.cloud</a>
 >
 
