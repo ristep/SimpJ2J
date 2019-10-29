@@ -4,9 +4,11 @@
 
 I started this project some time ago just for testing purposes. It was meant to be used in my ReactJS experiments. But I think is quite useful for small projects and not so small project.
 
-Do it simple bro is the main motto in this project, all other API for remote db access are to complex for my taste.
+Do it simple bro, is the main motto in this project. All other API for remote db access are to complex for my taste.
 
 Anyway now is completely open an anyone can use it as he whish.
+
+Actually this is only a JSON wrapper for SQL, or transformer, transforms JSON to SQL statement then execute that statement and return result in JSON encoded object.
 
 ## Getting Started
 
