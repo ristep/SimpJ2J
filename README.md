@@ -74,7 +74,8 @@ and if everything is OK service will return something like this
 For live example go to this link:
 
 >
-> [llc-test.sman.cloud](https://llc-test.sman.cloud/)
+<!-- > [llc-test.sman.cloud](https://llc-test.sman.cloud/){:target="_blank"} -->
+> <a href="https://llc-test.sman.cloud/" target="_blank">llc-test.sman.cloud</a>
 >
 
 ## Built With
