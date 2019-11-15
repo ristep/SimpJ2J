@@ -1,8 +1,9 @@
 <?php
-$servername = "localhost";
-$username = "laplaptest";
-$password = "TEhGpXxpGumWcreg";
-$dbname = "laplaptest";
+// this vars shoud be changed as needed 
+$servername = "localhost";       // MySQL server adress
+$username = "laplaptest";        // user for connecting to database
+$password = "TEhGpXxpGumWcreg";  // password
+$dbname = "laplaptest";          // database name
 
 try {
   $conn = new PDO("mysql:host=$servername;charset=utf8mb4;dbname=$dbname", $username, $password);
