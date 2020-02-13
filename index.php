@@ -20,31 +20,27 @@ $cn = require "conn.php";
 $method = $_SERVER['REQUEST_METHOD'];
 
 $input  = file_get_contents("php://input");
-//file_put_contents('inputDump.txt', $input, FILE_APPEND); // uncomment for debugging
 $input = json_decode($input);
+//file_put_contents('inputDump.txt', $input->phpFunction, FILE_APPEND); // uncomment for debugging
 
 $userData = require_once('tokening.php'); // for user validation uncomment
 
 switch ($method) {
 	case 'POST': // update, insert, delete and select 
-		if(isset($input->phpFunction)){
+		//file_put_contents('inputDump.txt', 'In post method'.$input->phpFunction, FILE_APPEND);
+		
+		if(isset($input->phpFunction)){ // RPC funcion call
 			require_once "phpFunctions.php";
-			if(function_exists($input->phpFunction)) {
-				$result = ($input->phpFunction)($input);
-				$ret = [ 
-					'OK' => 'true',
-					'error' => false,
-					'message' => "RPC called successfully!",
-					'rpcName' => $input->phpFunction,
-					'data' => $result
-				];
-			}else{
+			file_put_contents('inputDump.txt', 'In if isset', FILE_APPEND); 
+			if(function_exists($input->phpFunction)) 
+				$ret = ($input->phpFunction)($input,$cn);
+			else{
 				$ret = (object)[
 					'OK' => false,
 					'error' => true,
 					'rpcName' => $input->phpFunction,
 					'message' => "RPC call error! function $input->phpFunction  doesn't  exist! ",
-					'data' => (object)[]
+					'data' => false
 				];
 			}
 		}else
@@ -90,5 +86,3 @@ switch ($method) {
     ]);
 }
 echo json_encode($ret, JSON_NUMERIC_CHECK + JSON_PRESERVE_ZERO_FRACTION);
-
-?>
