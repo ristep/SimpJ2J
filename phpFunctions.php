@@ -22,11 +22,15 @@ function getUserData($inp, $conn){
 		try{
 			$sth->execute();
 			$result = $sth->fetch(PDO::FETCH_OBJ);
+			$sth2 = $conn->prepare('SHOW FIELDS FROM users');
+			$sth2->execute();
+//			$fields = $sth2->fetchAll(PDO::FETCH_OBJ);
 			$ret = [
 				'OK' => true,
 				'dataSet' => $inp->dataSet,
 				'message' => $sth->rowCount()==1 ? 'UserData OK' : 'User not Found!' ,
 				"data" => $result
+//				"fileds" => $fields
 			];
 			}catch (PDOException $e) {
 				$ret = [
