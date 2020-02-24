@@ -102,6 +102,7 @@ function build_filter($flt){
 }
 
 function build_sql($input){
+
 	$where = "";
 	switch ($input->sqlStatement) {
 	case 'sql':

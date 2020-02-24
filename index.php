@@ -23,7 +23,7 @@ $input  = file_get_contents("php://input");
 $input = json_decode($input);
 //file_put_contents('inputDump.txt', $input->phpFunction, FILE_APPEND); // uncomment for debugging
 
-$userData = require_once('tokening.php'); // for user validation uncomment
+//$userData = require_once('tokening.php'); // for user validation uncomment
 
 switch ($method) {
 	case 'POST': // update, insert, delete and select 
@@ -31,7 +31,7 @@ switch ($method) {
 		
 		if(isset($input->phpFunction)){ // RPC funcion call
 			require_once "phpFunctions.php";
-			file_put_contents('inputDump.txt', 'In if isset', FILE_APPEND); 
+			//file_put_contents('inputDump.txt', 'In if isset', FILE_APPEND); 
 			if(function_exists($input->phpFunction)) 
 				$ret = ($input->phpFunction)($input,$cn);
 			else{
@@ -56,11 +56,13 @@ switch ($method) {
 					$ret = [
 						'OK' => true,
 						'error' => false,
+						'table' => $input->table,
 						'message' => "$input->cmd successfully!",
 						'SQL' => $sql,
-						'count' => $sth->rowCount(),
-						"data" => $result
+						'count' => $sth->rowCount()
 						];
+						if($input->sqlStatement == "select")
+							$ret["data"] = $result;
 				} catch (PDOException $e) {
 					$ret = (object)[
 						'error' => 'DataBase',

@@ -28,6 +28,7 @@ function getUserData($inp, $conn){
 			$ret = [
 				'OK' => true,
 				'dataSet' => $inp->dataSet,
+				'table' => 'users',
 				'message' => $sth->rowCount()==1 ? 'UserData OK' : 'User not Found!' ,
 				"data" => $result
 //				"fileds" => $fields
