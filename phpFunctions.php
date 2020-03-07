@@ -48,12 +48,14 @@ function getUserData($inp, $conn, $tokenData){
 }
 
 function changePassword($inp, $conn, $tokenData){
-	if($tokenData->name != $inp->userName || $tokenData->userId != $inp->userId ){
+	if($tokenData->name != $inp->userName || $tokenData->id != $inp->userId ){
 		return [
 			'OK' => false,
 			'errorType' => 'fakeRquest',
 			'code' => 477,
 			'message' => "Fake request Error!",
+			'tUserId' =>  $tokenData->id,
+			'iUserId' =>  $inp->userId
 		];
 	}
 
