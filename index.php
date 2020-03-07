@@ -23,7 +23,7 @@ $input  = file_get_contents("php://input");
 $input = json_decode($input);
 //file_put_contents('inputDump.txt', $input->phpFunction, FILE_APPEND); // uncomment for debugging
 
-//$userData = require_once('tokening.php'); // for user validation uncomment
+$tokenData = require_once('tokening.php'); // for user validation uncomment
 
 switch ($method) {
 	case 'POST': // update, insert, delete and select 
@@ -33,7 +33,7 @@ switch ($method) {
 			require_once "phpFunctions.php";
 			//file_put_contents('inputDump.txt', 'In if isset', FILE_APPEND); 
 			if(function_exists($input->phpFunction)) 
-				$ret = ($input->phpFunction)($input,$cn);
+				$ret = ($input->phpFunction)($input,$cn,$tokenData);
 			else{
 				$ret = (object)[
 					'OK' => false,

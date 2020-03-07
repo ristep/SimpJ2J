@@ -11,7 +11,7 @@ function phpTestPrintout($inp, $conn){
 	return (object) array_merge( (array) $info, (array) $inp );
 }
 
-function getUserData($inp, $conn){
+function getUserData($inp, $conn, $tokenData){
 		if(isset($inp->userId)){
 			$sth = $conn->prepare("SELECT * FROM `users` WHERE `id`=:userId");
 			$sth->bindParam('userId', $inp->userId);
@@ -45,6 +45,40 @@ function getUserData($inp, $conn){
 			}		
 
 		return $ret;	
+}
+
+function changePassword($inp, $conn, $tokenData){
+	if(isset($inp->userId)){
+		$sth = $conn->prepare("SELECT * FROM `users` WHERE `id`=:userId");
+		$sth->bindParam('userId', $inp->userId);
+	}else{
+		$sth = $conn->prepare("SELECT * FROM `users` WHERE `name`=:name");
+		$sth->bindParam('name', $inp->userName);
+	}
+	try{
+		$sth->execute();
+		$result = $sth->fetch(PDO::FETCH_OBJ);
+//			$fields = $sth2->fetchAll(PDO::FETCH_OBJ);
+		$ret = [
+			'OK' => true,
+			'dataSet' => $inp->dataSet,
+			'table' => 'users',
+			'message' => "Password changed!" ,
+			"data" => $result
+//				"fileds" => $fields
+		];
+		}catch (PDOException $e) {
+			$ret = [
+				'OK' => false,
+				'errorType' => 'DataBase',
+				'code' => 416,
+				'message' => "Data Base Error!",
+				'PDO' => $e,
+				"userData" => false
+			];
+		}		
+
+	return $ret;	
 }
 
 // place for rpc declarations 
