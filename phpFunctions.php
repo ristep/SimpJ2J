@@ -48,8 +48,17 @@ function getUserData($inp, $conn, $tokenData){
 }
 
 function changePassword($inp, $conn, $tokenData){
+	if($tokenData->name != $inp->userName || $tokenData->userId != $inp->userId ){
+		return [
+			'OK' => false,
+			'errorType' => 'fakeRquest',
+			'code' => 477,
+			'message' => "Fake request Error!",
+		];
+	}
+
 	if(isset($inp->userId)){
-		$sth = $conn->prepare("SELECT * FROM `users` WHERE `id`=:userId");
+		$sth = $conn->prepare("SELECT * FROM `users` WHERE `id`=:userId"  );
 		$sth->bindParam('userId', $inp->userId);
 	}else{
 		$sth = $conn->prepare("SELECT * FROM `users` WHERE `name`=:name");
@@ -58,7 +67,6 @@ function changePassword($inp, $conn, $tokenData){
 	try{
 		$sth->execute();
 		$result = $sth->fetch(PDO::FETCH_OBJ);
-//			$fields = $sth2->fetchAll(PDO::FETCH_OBJ);
 		$ret = [
 			'OK' => true,
 			'dataSet' => $inp->dataSet,
