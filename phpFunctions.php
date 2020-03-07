@@ -48,27 +48,37 @@ function getUserData($inp, $conn, $tokenData){
 }
 
 function changePassword($inp, $conn, $tokenData){
-	if($tokenData->name != $inp->userName || $tokenData->id != $inp->userId ){
+	if(isset($inp->userId)){
+		if($tokenData->name != $inp->userName || $tokenData->id != $inp->userId ){
+			return [
+				'OK' => false,
+				'errorType' => 'fakeRquest',
+				'code' => 477,
+				'message' => "Fake request Error!"
+			];
+		};
+	};	
+
+	$sth = $conn->prepare("SELECT `password` FROM `users` WHERE `id`=:userId");
+	$sth->bindParam('userId', $inp->userId);
+	$sth->execute();
+	$result = $sth->fetch(PDO::FETCH_OBJ);
+	if( $inp->oldPassword != $result->password ){
 		return [
+			// 'oldp' =>  $inp->oldPassword,
+			// 'dnOld' => $result->password,
 			'OK' => false,
-			'errorType' => 'fakeRquest',
-			'code' => 477,
-			'message' => "Fake request Error!",
-			'tUserId' =>  $tokenData->id,
-			'iUserId' =>  $inp->userId
+			'errorType' => 'WrongOldPassword!',
+			'code' => 401,
+			'message' => "Unauthorized!"
 		];
 	}
 
-	if(isset($inp->userId)){
-		$sth = $conn->prepare("SELECT * FROM `users` WHERE `id`=:userId"  );
-		$sth->bindParam('userId', $inp->userId);
-	}else{
-		$sth = $conn->prepare("SELECT * FROM `users` WHERE `name`=:name");
-		$sth->bindParam('name', $inp->userName);
-	}
+	$sth2 = $conn->prepare("UPDATE `users` SET `password` = :userPassword WHERE `users`.`id` = :userId;");
+	$sth2->bindParam('userPassword', $inp->newPassword);
+	$sth2->bindParam('userId', $inp->userId);
 	try{
-		$sth->execute();
-		$result = $sth->fetch(PDO::FETCH_OBJ);
+		$sth2->execute();
 		$ret = [
 			'OK' => true,
 			'dataSet' => $inp->dataSet,
