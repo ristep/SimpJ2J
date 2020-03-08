@@ -81,11 +81,9 @@ function changePassword($inp, $conn, $tokenData){
 		$sth2->execute();
 		$ret = [
 			'OK' => true,
-			'dataSet' => $inp->dataSet,
-			'table' => 'users',
 			'message' => "Password changed!" ,
-			"data" => $result
-//				"fileds" => $fields
+//		"data" => $result
+// 		"fileds" => $fields
 		];
 		}catch (PDOException $e) {
 			$ret = [
