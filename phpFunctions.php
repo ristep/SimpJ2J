@@ -104,17 +104,48 @@ function photoList()
 	$ok = true;
 	$dir="./images/slikca";
 	$array = [];
+	$sizes = [];
   $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; 
 
   foreach (new DirectoryIterator($dir) as $fileInfo) {
       if ($fileInfo->getExtension() == 'jpg' ) {
-				array_push($array, $link.'images/slikca/'.$fileInfo->getFilename());
+				$fl ='images/slikca/'.$fileInfo->getFilename();
+				array_push($array, $link.$fl);
+				array_push($sizes, getimagesize( $fl ));
 			};
 	}
 	$ret = [
 		'OK' => true,
 		'dataSet' => 'photoList',
-		'data' => $array
+		'data' => $array,
+		'sizes' => $sizes
+	];
+	return ($ret);	
+}
+
+function photoListExif()
+{
+	$ok = true;
+	$dir="./images/slikca";
+	$array = [];
+	$sizes = [];
+	$exif = [];
+  $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; 
+
+  foreach (new DirectoryIterator($dir) as $fileInfo) {
+		if ($fileInfo->getExtension() == 'jpg' ) {
+			$fl ='images/slikca/'.$fileInfo->getFilename();
+			array_push($array, $link.$fl);
+			array_push($sizes, getimagesize( $fl ));
+			array_push($exif,  exif_read_data( $fl) );
+			};
+	}
+	$ret = [
+		'OK' => true,
+		'dataSet' => 'photoList',
+		'data' => $array,
+		'sizes' => $sizes,
+		'exif' => $exif
 	];
 	return ($ret);	
 }
