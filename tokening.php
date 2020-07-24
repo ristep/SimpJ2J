@@ -25,7 +25,6 @@ else{
 				$token = $input->au_token;
 			}	
 			else{	
-				require_once "echoErr.php";
 				echoErr(  (object)[ 'error' => 'tokenator', 'code' => 401, 'message' => 'Unauthorized, unknown user!!'  ] );
 				die();
 			}
@@ -40,5 +39,14 @@ catch(Exception $err) {
 }	
 // print_r($decoded);
 return $decoded;
+
+function echoErr($e){
+	//file_put_contents('sqlError.dump', print_r($e->errorInfo,true)."\n", FILE_APPEND );
+	if(isset($e->code))
+					http_response_code($e->code);
+	else
+					http_response_code('406');
+	die(json_encode($e));}
+?>
 
 ?>

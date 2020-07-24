@@ -33,7 +33,7 @@ function getUserData($inp, $conn, $tokenData){
 				"data" => $result
 //				"fileds" => $fields
 			];
-			}catch (PDOException $e) {
+			} catch (PDOException $e) {
 				$ret = [
 					'OK' => false,
 					'errorType' => 'DataBase',
@@ -68,9 +68,9 @@ function changePassword($inp, $conn, $tokenData){
 			// 'oldp' =>  $inp->oldPassword,
 			// 'dnOld' => $result->password,
 			'OK' => false,
-			'errorType' => 'WrongOldPassword!',
+			'errorType' => 'oldPasswordErr',
 			'code' => 401,
-			'message' => "Unauthorized!"
+			'message' => "Current Password is Incorrect!"
 		];
 	}
 
@@ -97,6 +97,26 @@ function changePassword($inp, $conn, $tokenData){
 		}		
 
 	return $ret;	
+}
+
+function photoList()
+{
+	$ok = true;
+	$dir="./images/slikca";
+	$array = [];
+  $link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']; 
+
+  foreach (new DirectoryIterator($dir) as $fileInfo) {
+      if ($fileInfo->getExtension() == 'jpg' ) {
+				array_push($array, $link.'images/slikca/'.$fileInfo->getFilename());
+			};
+	}
+	$ret = [
+		'OK' => true,
+		'dataSet' => 'photoList',
+		'data' => $array
+	];
+	return ($ret);	
 }
 
 // place for rpc declarations 
