@@ -23,7 +23,7 @@ $input  = file_get_contents("php://input");
 $input = json_decode($input);
 //file_put_contents('inputDump.txt', $input->phpFunction, FILE_APPEND); // uncomment for debugging
 
-$tokenData = require_once('tokening.php'); // for user validation uncomment
+// $tokenData = require_once('tokening.php'); // for user validation uncomment
 
 switch ($method) {
 	case 'POST': // update, insert, delete and select 

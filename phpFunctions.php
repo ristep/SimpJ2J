@@ -47,6 +47,45 @@ function getUserData($inp, $conn, $tokenData){
 		return $ret;	
 }
 
+function validNewUserName($inp,$conn,$tokenData){
+	if(isset($inp->userId) && isset($inp->oldUserName) && isset($inp->newUserName)){
+		try{
+			$sth = $conn->prepare("SELECT count(id) `count` FROM `users` WHERE id!=:userId and name=:newUserName");
+			$sth->bindParam('userId', $inp->userId);
+			$sth->bindParam('newUserName', $inp->newUserName);
+			$sth->execute();
+			$result = $sth->fetch(PDO::FETCH_OBJ);		
+			$data = $result->count == 0;
+			if($data)
+				//$message='Valid new Username';
+				$message = '';
+			else 
+				$message="Username is already taken!";
+			return [
+				'OK' => true,
+				'code' => 200,
+				'message' => $message,
+				'data' => $data
+			];	
+		} catch (PDOException $e){
+			return [
+				'OK' => false,
+				'errorType' => 'Some server ERROR!',
+				'code' => 500,
+				'PDO' => $e,
+				'message' => "Internal RPC server error!"
+			];
+		}
+	}else{
+		return [
+			'OK' => false,
+			'errorType' => 'Bad Request!',
+			'code' => 400,
+			'message' => "Wrong input parametars!"
+		];
+	}
+}
+
 function changePassword($inp, $conn, $tokenData){
 	if(isset($inp->userId)){
 		if($tokenData->name != $inp->userName || $tokenData->id != $inp->userId ){
