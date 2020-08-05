@@ -27,8 +27,10 @@ $input = json_decode($input);
 
 switch ($method) {
 	case 'POST': // update, insert, delete and select 
+		
 		//file_put_contents('inputDump.txt', 'In post method'.$input->phpFunction, FILE_APPEND);
-		sleep(5); //time delay for debuging in the clients
+		// sleep(5); // time delay for debuging in the clients, blur testing in reactjs :)
+		
 		if(isset($input->phpFunction)){ // RPC funcion call
 			require_once "phpFunctions.php";
 			//file_put_contents('inputDump.txt', 'In if isset', FILE_APPEND); 

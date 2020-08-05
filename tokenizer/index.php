@@ -27,8 +27,8 @@ else{
 	$password = $input->password;
 }
 
-// clear
-file_put_contents('inputDump.txt', $username . ' ' . $password . "\n", FILE_APPEND );
+// just loging may be commentet in production
+// file_put_contents('inputDump.txt', $username . ' ' . $password . "\n", FILE_APPEND );
 
 try { 
 	$sql = "select * from users where name=:name";
