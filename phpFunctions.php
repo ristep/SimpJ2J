@@ -46,7 +46,7 @@ function getUserData($inp, $conn, $tokenData){
 
 		return $ret;	
 }
-
+//Checking the validity of the username, new or changed one
 function validNewUserName($inp,$conn,$tokenData){
 	if(isset($inp->userId) && isset($inp->oldUserName) && isset($inp->newUserName)){
 		try{
@@ -86,6 +86,7 @@ function validNewUserName($inp,$conn,$tokenData){
 	}
 }
 
+// Change password function
 function changePassword($inp, $conn, $tokenData){
 	if(isset($inp->userId)){
 		if($tokenData->name != $inp->userName || $tokenData->id != $inp->userId ){
@@ -138,6 +139,7 @@ function changePassword($inp, $conn, $tokenData){
 	return $ret;	
 }
 
+// Getting photo list from a folder on the server, just for an example
 function photoList()
 {
 	$ok = true;
@@ -161,7 +163,7 @@ function photoList()
 	];
 	return ($ret);	
 }
-
+// photo list with exif data from photos
 function photoListExif()
 {
 	$ok = true;
