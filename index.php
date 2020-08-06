@@ -20,16 +20,16 @@ $cn = require "conn.php";
 $method = $_SERVER['REQUEST_METHOD'];
 
 $input  = file_get_contents("php://input");
+// file_put_contents('inputDump.txt', $input, FILE_APPEND); // uncomment for debugging
 $input = json_decode($input);
-//file_put_contents('inputDump.txt', $input->phpFunction, FILE_APPEND); // uncomment for debugging
 
-// $tokenData = require_once('tokening.php'); // for user validation uncomment
+$tokenData = require_once('tokening.php'); // for user validation uncomment
 
 switch ($method) {
 	case 'POST': // update, insert, delete and select 
 		
 		//file_put_contents('inputDump.txt', 'In post method'.$input->phpFunction, FILE_APPEND);
-		// sleep(5); // time delay for debuging in the clients, blur testing in reactjs :)
+		// sleep(2); // time delay for debuging in the clients, blur testing in reactjs :)
 		
 		if(isset($input->phpFunction)){ // RPC funcion call
 			require_once "phpFunctions.php";

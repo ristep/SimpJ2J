@@ -94,7 +94,7 @@ function changePassword($inp, $conn, $tokenData){
 				'OK' => false,
 				'errorType' => 'fakeRquest',
 				'code' => 477,
-				'message' => "Fake request Error!"
+				'message' => "Fake request Error! $tokenData->name != $inp->userName || $tokenData->id != $inp->userId"
 			];
 		};
 	};	
@@ -105,8 +105,8 @@ function changePassword($inp, $conn, $tokenData){
 	$result = $sth->fetch(PDO::FETCH_OBJ);
 	if( $inp->oldPassword != $result->password ){
 		return [
-			// 'oldp' =>  $inp->oldPassword,
-			// 'dnOld' => $result->password,
+			'oldp' =>  $inp->oldPassword,
+			 'dnOld' => $result->password,
 			'OK' => false,
 			'errorType' => 'oldPasswordErr',
 			'code' => 401,
