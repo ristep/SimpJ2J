@@ -1,8 +1,8 @@
 <?php
 // this vars shoud be changed as needed 
 $servername = "localhost";       // MySQL server adress
-$username = "pmauser";        // user for connecting to database
-$password = "LeprakonAAtest12&&";  // password
+$username = "FastFoodDemo";        // user for connecting to database
+$password = "58rvFWadkmbw18Up";  // password
 $dbname = "FastFoodDemo";          // database name
 
 try {

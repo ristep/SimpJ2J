@@ -17,7 +17,7 @@ Just download or clone this repo on jour LAMP server and compose :)
 Write on command prompt
 
 >
->composer
+>composer install
 >
 
 composer will download "firebase/php-jwt" in /vendor folder.
